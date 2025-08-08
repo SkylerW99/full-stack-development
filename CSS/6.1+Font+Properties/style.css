@@ -1,0 +1,28 @@
+*{
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 20px;
+}
+
+
+#color{
+    color:coral;
+}
+
+#size{
+    font-size: 3rem;
+}
+
+#fontWeight{
+    font-weight: 900;
+}
+
+#fontFamily{
+    font-family:'Caveat', serif;
+    font-weight: 400;
+}
+
+#textAlign{
+    text-align:right;
+}
+

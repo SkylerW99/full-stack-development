@@ -1,0 +1,41 @@
+/* Write your code here: */
+
+
+/* this is for apply the same style to different elements.
+In this case, both h1 and h2
+*/
+h1, h2{
+    color:blueviolet;
+}
+
+/*This is for applying the style to the direct child element.
+In this case, it applies the style to the paragraph child of
+the parent that has a class named box.
+This only works for ONE LEVEL DOWN.
+*/
+.box > p{
+    color:firebrick;
+}
+
+/*
+This works for the children ALL LEVELS down of the parent.
+*/
+.box li{
+    color:blue;
+}
+
+/*
+This is used for specifying the page element to select.
+*/
+li.done{
+color:seagreen;
+}
+
+/*
+Combine selectors: Levels Down + Chain Selector
+*/
+ul p.done{
+    font-size:2rem;
+}
+
+
