@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: white;
+  background-color: #121212;
+}
+
+.section {
+  padding: 32px;
+}
+
+.content {
+  width: 50%;
+  background: rgba(0, 0, 0, 0.67);
+  padding: 32px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.grid-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 16px;
+}
+
+.grid-images img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
