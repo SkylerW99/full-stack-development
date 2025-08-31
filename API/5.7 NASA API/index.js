@@ -114,6 +114,8 @@ app.get("/month",async(req,res)=>{
       "https://api.nasa.gov/planetary/apod",
       { params: { api_key: apiKey, start_date, end_date} }
     );
+
+  console.log(data);
   res.json(data);
 
   } catch (error) {

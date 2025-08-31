@@ -42,6 +42,13 @@ function initDateForm() {
         sectionThree.style.backgroundRepeat = "no-repeat";
         sectionThree.style.backgroundSize = "cover";
         sectionThree.style.backgroundPosition = "center";
+      } else if (data.video) {
+        sectionThree.style.backgroundImage = "";
+        sectionThree.innerHTML = `
+        <video controls autoplay loop muted>
+        <source src="${data.video}" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>`;
       } else {
         sectionThree.style.backgroundImage = "";
       }
@@ -62,6 +69,15 @@ function initMonthForm() {
   const gridImages = sel("#gridImages");
 
   async function loadMonth(month) {
+    gridImages.innerHTML = `
+    <div class="loading">
+      <div class="spinner-grow text-light" role="status">
+       <span class="visually-hidden">Loading...</span>
+       </div>
+      <p>Loading images...</p>
+    </div>
+  `;
+
     try {
       const res = await fetch(`/month?month=${encodeURIComponent(month)}`);
       if (!res.ok) throw new Error("APOD failed");
@@ -77,14 +93,27 @@ function initMonthForm() {
         .map((p) => {
           const src = p.hdurl || p.url;
           const title = escapeHtml(p.title || "");
+          const mediaType = p.media_type;
           //const date = escapeHtml(p.date || "");
-          
+
+          if (mediaType === 'image'){
           return `
-            <figure class="apod-item p-1">
+            <figure class="title-description gap-1 grey">
               <img src="${src}" alt="${title}" loading="lazy" />
-              <figcaption> ${title}</figcaption>
+              <cite title="Source Title grey"> ${title}</cite>
             </figure>
           `;
+          } else if(mediaType === 'video'){     
+          return  `
+          <figure class="title-description gap-1 grey">
+            <video controls autoplay loop muted>
+                <source src="${data.video}" type="video/mp4">
+            </video>
+          <cite title="Source Title grey"> ${title}</cite>
+          </figure>
+          `;
+        
+          }
         })
         .join("");
       gridImages.innerHTML = html;
@@ -114,14 +143,13 @@ function initMonthForm() {
   });
 
   //active buttons
-function setActiveButton(activeBtn){
-    buttons.forEach(btn=>btn.classList.remove('active'));
-    if (activeBtn){
-        activeBtn.classList.add('active');
+  function setActiveButton(activeBtn) {
+    buttons.forEach((btn) => btn.classList.remove("active"));
+    if (activeBtn) {
+      activeBtn.classList.add("active");
     }
-};
+  }
 }
-
 
 // Simple escaper for captions
 function escapeHtml(s) {
